@@ -1,0 +1,37 @@
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+func main() {
+
+	//creo el objeto de newScanner
+	scanner := bufio.NewScanner(os.Stdin)
+	//print
+	fmt.Println("Ingrese la operacion (suma, de la forma numero + numero, ej: 2+2): ")
+	//input de go, scanner
+	scanner.Scan()
+
+	//guardo el valor scaneado
+	operacion := scanner.Text()
+
+	//muestro la info guardada
+	fmt.Println("\n La operacion ingresada es: ", operacion)
+
+	valores := strings.Split(operacion, "+")
+
+	fmt.Println("\n Estos son los valores ingresados: ", valores)
+	fmt.Println("\n Primer y segundo valor sumados como texto: ", valores[0]+valores[1])
+
+	// Cast valores from text to number AtoInt convierte a operador 1 o muestra el error
+	operador1, _ := strconv.Atoi(valores[0])
+	operador2, _ := strconv.Atoi(valores[1])
+
+	fmt.Println("Suma de los dos operadores matematicamente: ", operador1+operador2)
+
+}
