@@ -42,7 +42,7 @@ func main() {
 	if err2 != nil {
 		fmt.Println("\n Hubo un error en operador 2")
 	} else {
-		fmt.Println("\n Continuamos con la operacion")
+		fmt.Println("\n el operador dos esta correcto")
 	}
 
 	fmt.Println("\n Suma de los dos operadores matematicamente: ", operador1+operador2)
