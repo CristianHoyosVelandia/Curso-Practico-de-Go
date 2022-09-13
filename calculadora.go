@@ -29,9 +29,16 @@ func main() {
 	fmt.Println("\n Primer y segundo valor sumados como texto: ", valores[0]+valores[1])
 
 	// Cast valores from text to number AtoInt convierte a operador 1 o muestra el error
-	operador1, _ := strconv.Atoi(valores[0])
+	operador1, err1 := strconv.Atoi(valores[0])
+
+	if err1 != nil {
+		fmt.Println("\n Hubo un error")
+	} else {
+		fmt.Println("\n Continuamos con la operacion")
+	}
+
 	operador2, _ := strconv.Atoi(valores[1])
 
-	fmt.Println("Suma de los dos operadores matematicamente: ", operador1+operador2)
+	fmt.Println("\n Suma de los dos operadores matematicamente: ", operador1+operador2)
 
 }
