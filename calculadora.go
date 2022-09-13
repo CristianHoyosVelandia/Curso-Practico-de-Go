@@ -32,12 +32,18 @@ func main() {
 	operador1, err1 := strconv.Atoi(valores[0])
 
 	if err1 != nil {
-		fmt.Println("\n Hubo un error")
+		fmt.Println("\n Hubo un error en operador 1")
 	} else {
 		fmt.Println("\n Continuamos con la operacion")
 	}
 
-	operador2, _ := strconv.Atoi(valores[1])
+	operador2, err2 := strconv.Atoi(valores[1])
+
+	if err2 != nil {
+		fmt.Println("\n Hubo un error en operador 2")
+	} else {
+		fmt.Println("\n Continuamos con la operacion")
+	}
 
 	fmt.Println("\n Suma de los dos operadores matematicamente: ", operador1+operador2)
 
