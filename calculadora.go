@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func calculadora() string {
+func leerEntrada() string {
 	//creo el objeto de newScanner
 	scanner := bufio.NewScanner(os.Stdin)
 	//print
@@ -21,50 +21,63 @@ func calculadora() string {
 
 }
 
-func main() {
+func leerOperador() string {
+	//creo el objeto de newScanner
+	scanner := bufio.NewScanner(os.Stdin)
+	//print
+	fmt.Println("Por favor ingrese el operador a realizar: ")
+	//input de go, scanner
+	scanner.Scan()
 
-	operacion := calculadora()
+	//guardo el valor scaneado
+	return scanner.Text()
 
-	//muestro la info guardada
-	fmt.Println("\n La operacion ingresada es: ", operacion)
-	operador := "-"
-	valores := strings.Split(operacion, operador)
+}
 
-	fmt.Println("\n Estos son los valores ingresados: ", valores)
-	// fmt.Println("\n Primer y segundo valor sumados como texto: ", valores[0]+valores[1])
+// struct.
+type calc struct{}
+
+// receiver option
+func (calc) operate(entrada string, operador string) int {
+
+	valores := strings.Split(entrada, operador)
 
 	// Cast valores from text to number AtoInt convierte a operador 1 o muestra el error
-	operador1, err1 := strconv.Atoi(valores[0])
-
-	if err1 != nil {
-		fmt.Println("\n Hubo un error en operador 1")
-	} else {
-		// fmt.Println("\n Continuamos con la operacion")
-	}
-
-	operador2, err2 := strconv.Atoi(valores[1])
-
-	if err2 != nil {
-		fmt.Println("\n Hubo un error en operador 2")
-	} else {
-		// fmt.Println("\n el operador dos esta correcto")
-	}
+	operador1 := parsear(valores[0])
+	operador2 := parsear(valores[1])
 
 	switch operador {
 	case "+":
-		fmt.Println("\n Suma de los dos operadores matematicamente: ", operador1+operador2)
-
+		// fmt.Println("\n Suma de los dos operadores matematicamente: ", operador1+operador2)
+		return operador1 + operador2
 	case "-":
-		fmt.Println("\n Resta de los dos operadores matematicamente: ", operador1-operador2)
-
+		// fmt.Println("\n Resta de los dos operadores matematicamente: ", operador1-operador2)
+		return operador1 - operador2
 	case "*":
-		fmt.Println("\n Multiplicacion de los dos operadores matematicamente: ", operador1*operador2)
-
+		// fmt.Println("\n Multiplicacion de los dos operadores matematicamente: ", operador1*operador2)
+		return operador1 * operador2
 	case "/":
-		fmt.Println("\n Division de los dos operadores matematicamente: ", operador1/operador2)
-
+		// fmt.Println("\n Division de los dos operadores matematicamente: ", operador1/operador2)
+		return operador1 / operador2
 	default:
-		fmt.Println("\n El operador no esta soportado")
+		fmt.Println("\n El operador", operador, " no esta soportado")
+		return 0
+
 	}
+}
+
+func parsear(entrada string) int {
+	operador, _ := strconv.Atoi(entrada)
+	return operador
+}
+
+func main() {
+
+	entrada := leerEntrada()
+	operador := leerOperador()
+	//definicion de objeto de calc
+	c := calc{}
+	calculadora := c.operate(entrada, operador)
+	fmt.Println("\n ", calculadora)
 
 }
