@@ -64,13 +64,37 @@ func main() {
 		task: []*task{t, t2},
 	}
 
-	fmt.Println(lista.task[0])
-
 	lista.agregaALista(t3)
+	//USAR CICLOS FOR
+	for i := 0; i < len(lista.task); i++ {
+		fmt.Println("Index: ", i, " Atributos: ", lista.task[i])
+	}
 
-	fmt.Println(lista.task[2])
+	fmt.Println()
+	//other For ways
+	for index, tarea := range lista.task {
+		fmt.Println("index: ", index, " Atributos: ", tarea)
+	}
+
+	//break in iterration cycle
+	for i := 0; i < 10; i++ {
+		if i == 5 {
+			break
+		}
+		fmt.Println(i)
+	}
+
+	//break in iterration cycle
+	for i := 0; i < 4; i++ {
+		//exception iteration
+		if i == 2 {
+			continue
+		}
+		fmt.Println(i)
+	}
+
 	// Size of a list
-	fmt.Println(len(lista.task))
+	// fmt.Println(len(lista.task))
 
 	lista.eliminarLista(2)
 
