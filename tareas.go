@@ -40,6 +40,25 @@ func (t *task) actualizarNombre(input string) {
 	t.nombre = input
 }
 
+func (t *taskList) imprimirLista() {
+
+	for _, lista := range t.task {
+		fmt.Println(" Nombre de la tarea: ", lista.nombre)
+		fmt.Println(" ¿Completado?: ", lista.completado)
+	}
+
+}
+
+func (t *taskList) imprimirListaCompletados() {
+
+	for _, lista := range t.task {
+		if lista.completado == true {
+			fmt.Println(" Nombre de la tarea: ", lista.nombre)
+		}
+	}
+
+}
+
 func main() {
 
 	t := &task{
@@ -65,37 +84,11 @@ func main() {
 	}
 
 	lista.agregaALista(t3)
-	//USAR CICLOS FOR
-	for i := 0; i < len(lista.task); i++ {
-		fmt.Println("Index: ", i, " Atributos: ", lista.task[i])
-	}
 
-	fmt.Println()
-	//other For ways
-	for index, tarea := range lista.task {
-		fmt.Println("index: ", index, " Atributos: ", tarea)
-	}
+	lista.imprimirLista()
 
-	//break in iterration cycle
-	for i := 0; i < 10; i++ {
-		if i == 5 {
-			break
-		}
-		fmt.Println(i)
-	}
+	lista.task[0].marcarCompletada()
 
-	//break in iterration cycle
-	for i := 0; i < 4; i++ {
-		//exception iteration
-		if i == 2 {
-			continue
-		}
-		fmt.Println(i)
-	}
-
-	// Size of a list
-	// fmt.Println(len(lista.task))
-
-	lista.eliminarLista(2)
-
+	fmt.Println("\n NUEVA LISTA DE TAREAS COMPLEATAS ")
+	lista.imprimirListaCompletados()
 }
