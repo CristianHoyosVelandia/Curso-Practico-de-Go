@@ -2,45 +2,39 @@ package main
 
 import "fmt"
 
-type perro struct {
+//how to define interface
+type animal interface {
+	//methods or atributes.
+	mover() string
 }
 
-type pez struct {
-}
+type perro struct{}
 
-type pajaro struct {
-}
+type pez struct{}
 
-func (perro) caminar() string {
+type pajaro struct{}
+
+func (perro) mover() string {
 	return "soy un perro y camino"
 }
 
-func (pez) nada() string {
+func (pez) mover() string {
 	return "soy un pez y nado"
 }
 
-func (pajaro) Vuela() string {
+func (pajaro) mover() string {
 	return "soy un pajaro y estoy volando"
 }
 
-func moverPerro(p perro) {
-	fmt.Println(p.caminar())
-}
-
-func moverPez(pe pez) {
-	fmt.Println(pe.nada())
-}
-
-func moverPajaro(pa pajaro) {
-	fmt.Println(pa.Vuela())
+func moverAnimal(a animal) {
+	fmt.Println(a.mover())
 }
 
 func main() {
 	p := perro{}
-	moverPerro(p)
+	moverAnimal(p)
 	pe := pez{}
-	moverPez(pe)
+	moverAnimal(pe)
 	pa := pajaro{}
-	moverPajaro(pa)
-
+	moverAnimal(pa)
 }
