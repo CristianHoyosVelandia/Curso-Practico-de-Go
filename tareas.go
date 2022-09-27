@@ -79,6 +79,18 @@ func main() {
 		completado:  false,
 	}
 
+	t4 := &task{
+		nombre:      "curso English",
+		description: "completar el curso",
+		completado:  false,
+	}
+
+	t5 := &task{
+		nombre:      "curso C#",
+		description: "completar el curso",
+		completado:  false,
+	}
+
 	lista := &taskList{
 		task: []*task{t, t2},
 	}
@@ -91,4 +103,20 @@ func main() {
 
 	fmt.Println("\n NUEVA LISTA DE TAREAS COMPLEATAS ")
 	lista.imprimirListaCompletados()
+
+	//maps llaves objetos
+	mapaTareas := make(map[string]*taskList)
+
+	mapaTareas["Cristian"] = lista
+
+	lista2 := &taskList{
+		task: []*task{t4, t5},
+	}
+
+	mapaTareas["OTO"] = lista2
+
+	fmt.Println("Tareas de Cristian")
+	mapaTareas["Cristian"].imprimirLista()
+	fmt.Println("Tareas de OTO")
+	mapaTareas["OTO"].imprimirLista()
 }
