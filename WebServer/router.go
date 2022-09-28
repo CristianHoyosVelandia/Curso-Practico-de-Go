@@ -20,6 +20,13 @@ func NewRouter() *Router {
 	}
 }
 
+// creo una funcion receiver para que sea detectada por el handler,
+// aca detecto si el handler existe en el mapa de rutas.
+func (r *Router) FindHandler(path string) (http.HandlerFunc, bool) {
+	handler, exist := r.rules[path]
+	return handler, exist
+}
+
 // Metodo ServeHTTP de router para poder implementar en el handler el atributo s.router en server.go
 // parametros: el primero es el escritor, el segundo es el request en donde viene la informacion
 // no olvidar colocar ServeHTTP con letras mayusculas
