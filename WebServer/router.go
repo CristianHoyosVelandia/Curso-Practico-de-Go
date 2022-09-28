@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 )
 
@@ -32,7 +31,20 @@ func (r *Router) FindHandler(path string) (http.HandlerFunc, bool) {
 // no olvidar colocar ServeHTTP con letras mayusculas
 func (r *Router) ServeHTTP(w http.ResponseWriter, request *http.Request) {
 
-	//impresion de mensaje respuesta que el servidor da a la ruta
-	//Fprintf es un escritor, que recive w que es el escritor asignado, y el mensaje que queremos mostrar
-	fmt.Fprintf(w, "Hello world!")
+	//manejo del mensaje de manera dinamica
+	//r es la referencia al router y usar la funcion FindHandler
+	//el FindHandler compara el request con el mapa de reglas para saber si existe o no.
+	//los valores son asignados a las variables 'handler' y 'exist'
+	handler, exist := r.FindHandler(request.URL.Path)
+
+	//Evaluacion del booleano del handler para saber si existe o no, error 404
+	if !exist {
+		//WriteHeader es para indicar el status del request
+		w.WriteHeader(http.StatusNotFound)
+		//el return nos ayuda a romper la funcion si esto no existe el handler
+		return
+	}
+	//handler para enviar objeto w y request
+	handler(w, request)
+
 }

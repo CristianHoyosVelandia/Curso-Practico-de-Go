@@ -43,3 +43,10 @@ func (s *Server) Listen() error {
 	//si la ejecucion salio bien, retorna un valor nil
 	return nil
 }
+
+// Handle es el nombre de la ruta por ejemplo "/api" asignado a un handler especifico
+func (s *Server) Handle(path string, handler http.HandlerFunc) {
+	//Asociacion del handler con la ruta, es decir, el mapa con la llave path asignado al handler
+	s.router.rules[path] = handler
+	//asi el servidor es capaz de agregar la ruta especifica a un handler especifico
+}
