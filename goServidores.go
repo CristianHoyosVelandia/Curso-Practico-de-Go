@@ -18,14 +18,20 @@ func main() {
 		"http://instagram.com",
 	}
 
-	for _, servidor := range servidores {
-		go revisarServidores(servidor, channel)
-	}
+	i := 0
 
-	for index := range servidores {
-		fmt.Println(<-channel, index+1)
-	}
+	for i < 2 {
+		for _, servidor := range servidores {
+			go revisarServidores(servidor, channel)
+		}
 
+		for index := range servidores {
+			fmt.Println(<-channel, index+1)
+		}
+		time.Sleep(1 * time.Second)
+		fmt.Println(<-channel)
+		i++
+	}
 	tiempoPaso := time.Since(inicio)
 	fmt.Printf("Tiempo de ejecuccion %q\n", tiempoPaso)
 }
