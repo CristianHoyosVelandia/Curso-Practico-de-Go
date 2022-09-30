@@ -44,6 +44,16 @@ func (s *Server) Listen() error {
 	return nil
 }
 
+// le decimos a go que no sabemos cuantos parametros vamos a enviar. cuando agregamos ...
+// le decimos a GO que puede llegar 1 o mas middlewares
+func AddMidleware(f http.HandlerFunc, middlewares ...Middleware) http.HandlerFunc {
+	for _, m := range middlewares {
+		f = m(f)
+	}
+
+	return f
+}
+
 // Handle es el nombre de la ruta por ejemplo "/api" asignado a un handler especifico
 func (s *Server) Handle(path string, handler http.HandlerFunc) {
 	//Asociacion del handler con la ruta, es decir, el mapa con la llave path asignado al handler
