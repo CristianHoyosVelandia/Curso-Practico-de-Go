@@ -46,7 +46,7 @@ func (s *Server) Listen() error {
 
 // le decimos a go que no sabemos cuantos parametros vamos a enviar. cuando agregamos ...
 // le decimos a GO que puede llegar 1 o mas middlewares
-func AddMidleware(f http.HandlerFunc, middlewares ...Middleware) http.HandlerFunc {
+func (s *Server) AddMidleware(f http.HandlerFunc, middlewares ...Middleware) http.HandlerFunc {
 	for _, m := range middlewares {
 		f = m(f)
 	}
