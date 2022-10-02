@@ -5,7 +5,9 @@ func main() {
 
 	//
 	//uso de la funcion handle con el path "/" y el handler
-	server.Handle("/", HandleRoot)
-	server.Handle("/api", server.AddMidleware(HandleHome, CheckAuth(), Loggin()))
+	server.Handle("GET", "/", HandleRoot)
+	server.Handle("POST", "/create", PostRequest)
+	server.Handle("POST", "/user", UserPostRequest)
+	server.Handle("POST", "/api", server.AddMidleware(HandleHome, CheckAuth(), Loggin()))
 	server.Listen()
 }

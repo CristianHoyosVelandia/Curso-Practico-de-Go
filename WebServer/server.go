@@ -55,8 +55,18 @@ func (s *Server) AddMidleware(f http.HandlerFunc, middlewares ...Middleware) htt
 }
 
 // Handle es el nombre de la ruta por ejemplo "/api" asignado a un handler especifico
-func (s *Server) Handle(path string, handler http.HandlerFunc) {
+func (s *Server) Handle(method string, path string, handler http.HandlerFunc) {
 	//Asociacion del handler con la ruta, es decir, el mapa con la llave path asignado al handler
-	s.router.rules[path] = handler
 	//asi el servidor es capaz de agregar la ruta especifica a un handler especifico
+	_, exist := s.router.rules[path]
+
+	//aca realizamos la asociacion de existencia del mapa, dado que el mapa no existe, con el fin
+	//de que el usuario conozca que evidentemente no existe, creamos el metodo y nos devolvera
+	// un header de peticion diciendo que el methodo no esta defiinido para esa rutsa
+	if !exist {
+		s.router.rules[path] = make(map[string]http.HandlerFunc)
+	}
+	//creo el handler con el metodo
+	s.router.rules[path] = make(map[string]http.HandlerFunc)
+	s.router.rules[path][method] = handler
 }
